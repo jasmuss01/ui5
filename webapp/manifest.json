@@ -1,7 +1,7 @@
 {
-	"_version": "1.9.0",
+	"_version": "1.8.0",
 	"sap.app": {
-		"id": "PlaceholderNamespace.ui5Name",ui5ui5
+		"id": "namespace.placeholder",
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"title": "{{appTitle}}",
@@ -20,8 +20,8 @@
 			}
 		},
 		"sourceTemplate": {
-			"id": "sap.ui.ui5-template-plugin.2masterdetail",
-			"version": "1.56.1"
+			"id": "html5projecttemplates.2masterdetailcrud",
+			"version": "1.40.12"
 		}
 	},
 	"sap.ui": {
@@ -38,25 +38,29 @@
 			"desktop": true,
 			"tablet": true,
 			"phone": true
-		}
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
 	},
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "PlaceholderNamespace.ui5
+			"viewName": "namespace.placeholder.view.App",
 			"type": "XML",
-			"async": true,
 			"id": "app"
 		},
 		"dependencies": {
-			"minUI5Version": "1.42.0",
+			"minUI5Version": "1.30.0",
 			"libs": {
 				"sap.ui.core": {},
 				"sap.m": {},
+				"sap.ui.layout": {},
 				"sap.f": {},
 				"sap.ushell": {},
-				"sap.collaboration": {
-					"lazy": true
-				}
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
 			}
 		},
 		"contentDensities": {
@@ -67,23 +71,31 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "PlaceholderNamespace.ui5
+					"bundleName": "namespace.placeholder.i18n.i18n"
 				}
 			},
 			"": {
 				"dataSource": "mainService",
-				"preload": true
+				"settings": {
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					},
+					"defaultBindingMode": "TwoWay"
+				}
 			}
 		},
 		"routing": {
 			"config": {
-				"routerClass": "sap.f.routing.Router",
+				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
-				"viewPath": "PlaceholderNamespace.ui5
-				"controlId": "layout",
-				"controlAggregation": "beginColumnPages",
+				"viewPath": "namespace.placeholder.view",
+				"controlId": "idAppControl",
+				"controlAggregation": "detailPages",
 				"bypassed": {
-					"target": "notFound"
+					"target": [
+						"master",
+						"notFound"
+					]
 				},
 				"async": true
 			},
@@ -91,10 +103,13 @@
 				{
 					"pattern": "",
 					"name": "master",
-					"target": "master"
+					"target": [
+						"object",
+						"master"
+					]
 				},
 				{
-					"pattern": "ProjektSet/{objectId}",
+					"pattern": "ProjektSet/{ID}",
 					"name": "object",
 					"target": [
 						"master",
@@ -106,18 +121,25 @@
 				"master": {
 					"viewName": "Master",
 					"viewLevel": 1,
-					"viewId": "master"
+					"viewId": "master",
+					"controlAggregation": "masterPages"
 				},
 				"object": {
 					"viewName": "Detail",
 					"viewId": "detail",
-					"viewLevel": 1,
-					"controlAggregation": "midColumnPages"
+					"viewLevel": 2
+				},
+				"create": {
+					"viewName": "CreateEntity",
+					"viewLevel": 2
 				},
 				"detailObjectNotFound": {
 					"viewName": "DetailObjectNotFound",
-					"viewId": "detailObjectNotFound",
-					"controlAggregation": "midColumnPages"
+					"viewId": "detailObjectNotFound"
+				},
+				"detailNoObjectsAvailable": {
+					"viewName": "DetailNoObjectsAvailable",
+					"viewId": "detailNoObjectsAvailable"
 				},
 				"notFound": {
 					"viewName": "NotFound",

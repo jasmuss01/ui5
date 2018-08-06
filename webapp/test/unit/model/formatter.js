@@ -1,8 +1,6 @@
-/*global QUnit*/
-
 sap.ui.define([
 	"sap/m/Text",
-	"PlaceholderNamespace/ui5
+	"namespace/placeholder/model/formatter"
 ], function (Text, formatter) {
 	"use strict";
 
@@ -12,7 +10,8 @@ sap.ui.define([
 		// Act
 		var fCurrency = formatter.currencyValue(sValue);
 
-		// Assert
+		// 
+
 		assert.strictEqual(fCurrency, fExpectedNumber, "The rounding was correct");
 	}
 
@@ -35,4 +34,5 @@ sap.ui.define([
 	QUnit.test("Should round a zero", function (assert) {
 		currencyValueTestCase.call(this, assert, "0", "0.00");
 	});
+
 });
