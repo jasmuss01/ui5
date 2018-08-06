@@ -4,20 +4,20 @@ sap.ui.define([
 	"use strict";
 
 	function getFrameUrl (sHash, sUrlParameters) {
-		var sUrl = jQuery.sap.getResourcePath("PlaceholderNamespace/PlaceholderProjectName/app", ".html");
+		var sUrl = jQuery.sap.getResourcePath("PlaceholderNamespace/ui5/app", ".html");
 		sHash = sHash || "";
 		sUrlParameters = sUrlParameters ? "?" + sUrlParameters : "";
 
 		if (sHash) {
-			sHash = "#PlaceholderTitle-display&/" + (sHash.indexOf("/") === 0 ? sHash.substring(1) : sHash);
+			sHash = "#Projektverwaltung-display&/" + (sHash.indexOf("/") === 0 ? sHash.substring(1) : sHash);
 		} else {
-			sHash = "#PlaceholderTitle-display";
+			sHash = "#Projektverwaltung-display";
 		}
 
 			return sUrl + sUrlParameters + sHash;
 	}
 
-	return Opa5.extend("PlaceholderNamespace.PlaceholderProjectName.test.integration.arrangements.Arrangement", {
+	return Opa5.extend("PlaceholderNamespace.ui5.test.integration.arrangements.Arrangement", {
 
 		iStartTheApp : function (oOptions) {
 			oOptions = oOptions || {};

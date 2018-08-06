@@ -2,13 +2,13 @@
 sap.ui.define([
 		"sap/ui/core/UIComponent",
 		"sap/ui/Device",
-		"PlaceholderNamespace/PlaceholderProjectName/model/models",
-		"PlaceholderNamespace/PlaceholderProjectName/controller/ListSelector",
-		"PlaceholderNamespace/PlaceholderProjectName/controller/ErrorHandler"
+		"PlaceholderNamespace/ui5
+		"PlaceholderNamespace/ui5/controller/ListSelector",
+		"PlaceholderNamespace/ui5ndler"
 	], function (UIComponent, Device, models, ListSelector, ErrorHandler) {
 		"use strict";
 
-		return UIComponent.extend("PlaceholderNamespace.PlaceholderProjectName.Component", {
+		return UIComponent.extend("PlaceholderNamespace.ui5.Component", {
 
 			metadata : {
 				manifest : "json"

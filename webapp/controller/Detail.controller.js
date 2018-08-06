@@ -1,12 +1,12 @@
 /*global location */
 sap.ui.define([
-		"PlaceholderNamespace/PlaceholderProjectName/controller/BaseController",
+		"PlaceholderNamespace/ui5troller",
 		"sap/ui/model/json/JSONModel",
-		"PlaceholderNamespace/PlaceholderProjectName/model/formatter"
+		"PlaceholderNamespace/ui5/model/formatter"
 	], function (BaseController, JSONModel, formatter) {
 		"use strict";
 
-		return BaseController.extend("PlaceholderNamespace.PlaceholderProjectName.controller.Detail", {
+		return BaseController.extend("PlaceholderNamespace.ui5, {
 
 			formatter: formatter,
 

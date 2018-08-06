@@ -2,7 +2,7 @@
 /*eslint-env browser*/
 
 sap.ui.define([
-	"PlaceholderNamespace/PlaceholderProjectName/controller/ListSelector",
+	"PlaceholderNamespace/ui5ector",
 	"sap/ui/thirdparty/sinon",
 	"sap/ui/thirdparty/sinon-qunit"
 ], function(ListSelector) {

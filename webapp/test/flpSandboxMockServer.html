@@ -4,7 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>PlaceholderTitle</title>
+		<title>Projektverwaltung</title>
 
 
 		<!-- Bootstrap the unified shell in sandbox mode for standalone usage.
@@ -35,12 +35,12 @@
 					}
 				},
 				applications: {
-					"PlaceholderTitle-display": {
-						additionalInformation: "SAPUI5.Component=PlaceholderNamespace.PlaceholderProjectName",
+					"Projektverwaltung-display": {
+						additionalInformation: "SAPUI5.Component=PlaceholderNamespace.ui5",
 						applicationType: "URL",
 						url: "../",
-						description: "PlaceholderDescription",
-						title: "PlaceholderTitle"
+						description: "App für Projekte
+						title: "Projektverwaltung"
 					}
 				}
 			};
@@ -55,7 +55,7 @@
 				data-sap-ui-theme="sap_belize"
 				data-sap-ui-preload="async"
 				data-sap-ui-compatVersion="edge"
-				data-sap-ui-resourceroots='{"PlaceholderNamespace.PlaceholderProjectName": "../"}'
+				data-sap-ui-resourceroots='{"PlaceholderNamespace.ui5": "../"}'
 				data-sap-ui-frameOptions='allow'> // NON-SECURE setting for testing environment
 		</script>
 
@@ -63,7 +63,7 @@
 			sap.ui.getCore().attachInit(function() {
 
 				sap.ui.require([
-					"PlaceholderNamespace/PlaceholderProjectName/localService/mockserver"
+					"PlaceholderNamespace/ui5/localService/mockserver"
 				], function (mockserver) {
 					// set up test service for local testing
 					mockserver.init();

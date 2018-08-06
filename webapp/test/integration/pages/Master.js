@@ -1,7 +1,7 @@
 sap.ui.define([
 	"sap/ui/test/Opa5",
 	"sap/ui/test/actions/Press",
-	"PlaceholderNamespace/PlaceholderProjectName/test/integration/pages/Common",
+	"PlaceholderNamespace/ui5ages/Common",
 	"sap/ui/test/actions/EnterText",
 	"sap/ui/test/matchers/AggregationLengthEquals",
 	"sap/ui/test/matchers/AggregationFilled",

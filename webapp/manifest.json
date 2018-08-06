@@ -1,7 +1,7 @@
 {
 	"_version": "1.9.0",
 	"sap.app": {
-		"id": "PlaceholderNamespace.PlaceholderProjectName.PlaceholderProjectName",
+		"id": "PlaceholderNamespace.ui5Name",ui5ui5
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"title": "{{appTitle}}",
@@ -42,7 +42,7 @@
 	},
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "PlaceholderNamespace.PlaceholderProjectName.view.App",
+			"viewName": "PlaceholderNamespace.ui5
 			"type": "XML",
 			"async": true,
 			"id": "app"
@@ -67,7 +67,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "PlaceholderNamespace.PlaceholderProjectName.i18n.i18n"
+					"bundleName": "PlaceholderNamespace.ui5
 				}
 			},
 			"": {
@@ -79,7 +79,7 @@
 			"config": {
 				"routerClass": "sap.f.routing.Router",
 				"viewType": "XML",
-				"viewPath": "PlaceholderNamespace.PlaceholderProjectName.view",
+				"viewPath": "PlaceholderNamespace.ui5
 				"controlId": "layout",
 				"controlAggregation": "beginColumnPages",
 				"bypassed": {

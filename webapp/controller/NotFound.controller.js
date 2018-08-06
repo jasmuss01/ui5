@@ -1,9 +1,9 @@
 sap.ui.define([
-	"PlaceholderNamespace/PlaceholderProjectName/controller/BaseController"
+	"PlaceholderNamespace/ui5troller"
 	], function (BaseController) {
 		"use strict";
 
-		return BaseController.extend("PlaceholderNamespace.PlaceholderProjectName.controller.NotFound", {
+		return BaseController.extend("PlaceholderNamespace.ui5.controller.NotFound", {
 
 			onInit: function () {
 				this.getRouter().getTarget("notFound").attachDisplay(this._onNotFoundDisplayed, this);

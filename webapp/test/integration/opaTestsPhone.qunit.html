@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Integration tests for PlaceholderTitle</title>
+		<title>Integration tests for Projektverwaltung</title>
 		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
 		<meta charset="UTF-8">
 
 		<script id="sap-ui-bootstrap"
 				src="../../resources/sap-ui-core.js"
 				data-sap-ui-resourceroots='{
-					"PlaceholderNamespace.PlaceholderProjectName": "../../",
-					"PlaceholderNamespace.PlaceholderProjectName.app" : "../flpSandboxMockServer"
+					"PlaceholderNamespace.ui5": "../../",
+					"PlaceholderNamespace.ui5.app" : "../flpSandboxMockServer"
 				}'
 				data-sap-ui-preload="async">
 		</script>
@@ -25,7 +25,7 @@
 
 			sap.ui.getCore().attachInit(function() {
 				sap.ui.require([
-					"PlaceholderNamespace/PlaceholderProjectName/test/integration/PhoneJourneys"
+					"PlaceholderNamespace/ui5/test/integration/PhoneJourneys"
 				], function() {
 					QUnit.start();
 				});

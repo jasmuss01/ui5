@@ -2,7 +2,7 @@
 
 sap.ui.define([
 	"sap/m/Text",
-	"PlaceholderNamespace/PlaceholderProjectName/model/formatter"
+	"PlaceholderNamespace/ui5
 ], function (Text, formatter) {
 	"use strict";
 

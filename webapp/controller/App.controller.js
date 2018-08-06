@@ -1,10 +1,10 @@
 sap.ui.define([
-		"PlaceholderNamespace/PlaceholderProjectName/controller/BaseController",
+		"PlaceholderNamespace/ui5troller",
 		"sap/ui/model/json/JSONModel"
 	], function (BaseController, JSONModel) {
 		"use strict";
 
-		return BaseController.extend("PlaceholderNamespace.PlaceholderProjectName.controller.App", {
+		return BaseController.extend("PlaceholderNamespace.ui5.controller.App", {
 
 			onInit : function () {
 				var oViewModel,

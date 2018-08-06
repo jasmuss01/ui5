@@ -1,6 +1,6 @@
 /*global history */
 sap.ui.define([
-		"PlaceholderNamespace/PlaceholderProjectName/controller/BaseController",
+		"PlaceholderNamespace/ui5troller",
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/routing/History",
 		"sap/ui/model/Filter",
@@ -8,11 +8,11 @@ sap.ui.define([
 		"sap/ui/model/FilterOperator",
 		"sap/m/GroupHeaderListItem",
 		"sap/ui/Device",
-		"PlaceholderNamespace/PlaceholderProjectName/model/formatter"
+		"PlaceholderNamespace/ui5
 	], function (BaseController, JSONModel, History, Filter, Sorter, FilterOperator, GroupHeaderListItem, Device, formatter) {
 		"use strict";
 
-		return BaseController.extend("PlaceholderNamespace.PlaceholderProjectName.controller.Master", {
+		return BaseController.extend("PlaceholderNamespace.ui5, {
 
 			formatter: formatter,
 
@@ -120,7 +120,7 @@ sap.ui.define([
 			 */
 			onOpenViewSettings : function (oEvent) {
 				if (!this._oViewSettingsDialog) {
-					this._oViewSettingsDialog = sap.ui.xmlfragment("PlaceholderNamespace.PlaceholderProjectName.view.ViewSettingsDialog", this);
+					this._oViewSettingsDialog = sap.ui.xmlfragment("PlaceholderNamespace.ui5.view.ViewSettingsDialog", this);
 					this.getView().addDependent(this._oViewSettingsDialog);
 					// forward compact/cozy style into Dialog
 					this._oViewSettingsDialog.addStyleClass(this.getOwnerComponent().getContentDensityClass());

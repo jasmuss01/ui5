@@ -1,4 +1,4 @@
-<mvc:View controllerName="PlaceholderNamespace.PlaceholderProjectName.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+<mvc:View controllerName="PlaceholderNamespace.ui5.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
 	<semantic:SemanticPage id="detailPage" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:titleHeading>

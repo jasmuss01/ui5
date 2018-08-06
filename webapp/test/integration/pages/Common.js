@@ -3,7 +3,7 @@ sap.ui.define([
 ], function(Opa5) {
 	"use strict";
 
-	return Opa5.extend("PlaceholderNamespace.PlaceholderProjectName.test.integration.pages.Common", {
+	return Opa5.extend("PlaceholderNamespace.ui5ages.Common", {
 
 		createAWaitForAnEntitySet : function  (oOptions) {
 			return {
@@ -30,7 +30,7 @@ sap.ui.define([
 
 		getMockServer : function () {
 			return new Promise(function (success) {
-				Opa5.getWindow().sap.ui.require(["PlaceholderNamespace/PlaceholderProjectName/localService/mockserver"], function (mockserver) {
+				Opa5.getWindow().sap.ui.require(["PlaceholderNamespace/ui5erver"], function (mockserver) {
 					success(mockserver.getMockServer());
 				});
 			});

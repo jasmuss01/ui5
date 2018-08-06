@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="PlaceholderNamespace.PlaceholderProjectName.controller.App"
+	controllerName="PlaceholderNamespace.ui5.controller.App"
 	xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
 	xmlns="sap.f"

@@ -5,16 +5,16 @@
 
 sap.ui.define([
 	"sap/ui/test/Opa5",
-	"PlaceholderNamespace/PlaceholderProjectName/test/integration/arrangements/Arrangement","PlaceholderNamespace/PlaceholderProjectName/test/integration/MasterJourney",
-	"PlaceholderNamespace/PlaceholderProjectName/test/integration/NavigationJourney",
-	"PlaceholderNamespace/PlaceholderProjectName/test/integration/NotFoundJourney",
-	"PlaceholderNamespace/PlaceholderProjectName/test/integration/BusyJourney",
-	"PlaceholderNamespace/PlaceholderProjectName/test/integration/FLPIntegrationJourney"
+	"PlaceholderNamespace/ui5rrangements/Arrangement","PlaceholderNamespace/PlaceholderProjectName/test/integratioui5
+	"PlaceholderNamespace/ui5avigationJourney",
+	"PlaceholderNamespace/ui5otFoundJourney",
+	"PlaceholderNamespace/ui5/test/integration/BusyJourney",
+	"PlaceholderNamespace/ui5/test/integration/FLPIntegrationJourney"
 ], function (Opa5, Arrangement) {
 	"use strict";
 	Opa5.extendConfig({
 		arrangements: new Arrangement(),
-		viewNamespace: "PlaceholderNamespace.PlaceholderProjectName.view.",
+		viewNamespace: "PlaceholderNamespace.ui5.view.",
 		autoWait: true
 	});
 });

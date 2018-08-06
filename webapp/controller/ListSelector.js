@@ -1,17 +1,17 @@
-﻿sap.ui.define([
+sap.ui.define([
 		"sap/ui/base/Object",
 		"sap/m/GroupHeaderListItem"
 	], function (BaseObject, GroupHeaderListItem) {
 		"use strict";
 
-		return BaseObject.extend("PlaceholderNamespace.PlaceholderProjectName.controller.ListSelector", {
+		return BaseObject.extend("PlaceholderNamespace.ui5ector", {
 
 			/**
 			 * Provides a convenience API for selecting list items. All the functions will wait until the initial load of the a List passed to the instance by the setBoundMasterList
 			 * function.
 			 * @class
 			 * @public
-			 * @alias PlaceholderNamespace.PlaceholderProjectName.controller.ListSelector
+			 * @alias PlaceholderNamespace.ui5.controller.ListSelector
 			 */
 
 			constructor : function () {

@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="PlaceholderNamespace.PlaceholderProjectName.controller.NotFound"
+	controllerName="PlaceholderNamespace.ui5d"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
 
