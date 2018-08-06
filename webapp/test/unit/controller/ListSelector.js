@@ -1,19 +1,16 @@
-/*global QUnit,sinon*/
-/*eslint-env browser*/
-
 sap.ui.define([
-	"PlaceholderNamespace/ui5ector",
+	"namespace/placeholder/controller/ListSelector",
 	"sap/ui/thirdparty/sinon",
 	"sap/ui/thirdparty/sinon-qunit"
-], function(ListSelector) {
+], function (ListSelector) {
 	"use strict";
 
 	QUnit.module("Initialization", {
-		beforeEach : function () {
+		setup: function () {
 			sinon.config.useFakeTimers = false;
 			this.oListSelector = new ListSelector();
 		},
-		afterEach : function () {
+		teardown: function () {
 			this.oListSelector.destroy();
 		}
 	});
@@ -36,34 +33,34 @@ sap.ui.define([
 	});
 
 	QUnit.module("List loading", {
-		beforeEach : function () {
+		setup: function () {
 			sinon.config.useFakeTimers = false;
 			this.oListSelector = new ListSelector();
 		},
-		afterEach : function () {
+		teardown: function () {
 			this.oListSelector.destroy();
 		}
 	});
 
-	function createListStub (bCreateListItem, sBindingPath) {
+	function createListStub(bCreateListItem, sBindingPath) {
 		var fnGetParameter = function () {
 				return true;
 			},
 			oDataStub = {
-				getParameter : fnGetParameter
+				getParameter: fnGetParameter
 			},
 			fnAttachEventOnce = function (sEventName, fnCallback) {
 				fnCallback(oDataStub);
 			},
 			fnGetBinding = this.stub().returns({
-				attachEventOnce : fnAttachEventOnce
+				attachEventOnce: fnAttachEventOnce
 			}),
 			fnAttachEvent = function (sEventName, fnCallback, oContext) {
 				fnCallback.apply(oContext);
 			},
 			oListItemStub = {
-				getBindingContext : this.stub().returns({
-					getPath : this.stub().returns(sBindingPath)
+				getBindingContext: this.stub().returns({
+					getPath: this.stub().returns(sBindingPath)
 				})
 			},
 			aListItems = [];
@@ -73,10 +70,10 @@ sap.ui.define([
 		}
 
 		return {
-			attachEvent : fnAttachEvent,
-			attachEventOnce : fnAttachEventOnce,
-			getBinding : fnGetBinding,
-			getItems : this.stub().returns(aListItems)
+			attachEvent: fnAttachEvent,
+			attachEventOnce: fnAttachEventOnce,
+			getBinding: fnGetBinding,
+			getItems: this.stub().returns(aListItems)
 		};
 	}
 
@@ -112,24 +109,24 @@ sap.ui.define([
 	});
 
 	QUnit.module("Selecting item in the list", {
-		beforeEach : function () {
+		setup: function () {
 			sinon.config.useFakeTimers = false;
 			this.oListSelector = new ListSelector();
 			this.oListSelector.oWhenListLoadingIsDone = {
-				then : function (fnAct) {
+				then: function (fnAct) {
 					this.fnAct = fnAct;
 				}.bind(this)
 			};
 		},
-		afterEach : function () {
+		teardown: function () {
 			this.oListSelector.destroy();
 		}
 	});
 
-	function createStubbedListItem (sBindingPath) {
+	function createStubbedListItem(sBindingPath) {
 		return {
-			getBindingContext : this.stub().returns({
-				getPath : this.stub().returns(sBindingPath)
+			getBindingContext: this.stub().returns({
+				getPath: this.stub().returns(sBindingPath)
 			})
 		};
 	}
@@ -141,10 +138,10 @@ sap.ui.define([
 			oSelectedListItemStub = createStubbedListItem.call(this, "a different binding path");
 
 		this.oListSelector._oList = {
-			getMode : this.stub().returns("SingleSelectMaster"),
-			getSelectedItem : this.stub().returns(oSelectedListItemStub),
-			getItems : this.stub().returns([ oSelectedListItemStub, oListItemToSelect, createListStub.call(this, "yet another list binding") ]),
-			setSelectedItem : function (oItem) {
+			getMode: this.stub().returns("SingleSelectMaster"),
+			getSelectedItem: this.stub().returns(oSelectedListItemStub),
+			getItems: this.stub().returns([oSelectedListItemStub, oListItemToSelect, createListStub.call(this, "yet another list binding")]),
+			setSelectedItem: function (oItem) {
 				//Assert
 				assert.strictEqual(oItem, oListItemToSelect, "Did select the list item with a matching binding context");
 			}
@@ -162,8 +159,8 @@ sap.ui.define([
 			oSelectedListItemStub = createStubbedListItem.call(this, sBindingPath);
 
 		this.oListSelector._oList = {
-			getMode:  this.stub().returns("SingleSelectMaster"),
-			getSelectedItem : this.stub().returns(oSelectedListItemStub)
+			getMode: this.stub().returns("SingleSelectMaster"),
+			getSelectedItem: this.stub().returns(oSelectedListItemStub)
 		};
 
 		// Act
@@ -180,7 +177,7 @@ sap.ui.define([
 		var sBindingPath = "anything";
 
 		this.oListSelector._oList = {
-			getMode : this.stub().returns("None")
+			getMode: this.stub().returns("None")
 		};
 
 		// Act
@@ -190,6 +187,84 @@ sap.ui.define([
 
 		// Assert
 		assert.ok(true, "did not fail");
+	});
+
+	QUnit.test("Should  Find the list item from a binding contexts match", function (assert) {
+		// Arrange
+		var sBindingPath = "anything",
+			oListItem = createStubbedListItem.call(this, "a different binding path"),
+			oSelectedListItemStub = createStubbedListItem.call(this, sBindingPath);
+
+		this.oListSelector._oList = {
+			getMode: this.stub().returns("SingleSelectMaster"),
+			getSelectedItem: this.stub().returns(oSelectedListItemStub),
+			getItems: this.stub().returns([oSelectedListItemStub, oListItem]),
+			setSelectedItem: function (oItem) {
+				//Assert
+				assert.strictEqual(oItem, oListItem, "Did select the list item with a matching binding context");
+			}
+
+		};
+		this.oListSelector.selectAListItem(sBindingPath);
+		// Act
+		// Resolve list loading
+		this.fnAct();
+		var oItem = this.oListSelector.findListItem(sBindingPath);
+		// Assert
+		assert.ok(oItem, "did not fail");
+	});
+
+	QUnit.test("Should find the next valid list item from the master list after the selected", function (assert) {
+		// Arrange
+		var sNextBindingPath = "next item",
+			sBindingPath = "selected",
+			oListItem = createStubbedListItem.call(this, "first item"),
+			oSelectedListItemStub = createStubbedListItem.call(this, sBindingPath),
+			oNextListItemStub = createStubbedListItem.call(this, sNextBindingPath);
+
+		this.oListSelector._oList = {
+			getMode: this.stub().returns("SingleSelectMaster"),
+			getSelectedItem: this.stub().returns(oSelectedListItemStub),
+			getItems: this.stub().returns([oListItem, oSelectedListItemStub, oNextListItemStub]),
+			setSelectedItem: function (oItem) {
+				//Assert
+				assert.strictEqual(oItem, oListItem, "Did select the list item with a matching binding context");
+			}
+
+		};
+		this.oListSelector.selectAListItem(sBindingPath);
+		// Act
+		// Resolve list loading
+		this.fnAct();
+		var oItem = this.oListSelector.findNextItem(sBindingPath);
+		// Assert
+		assert.ok(oItem.getBindingContext().getPath() === sNextBindingPath, "did not fail");
+	});
+	QUnit.test("Should return  the first list item ", function (assert) {
+		// Arrange
+		var sFirstBindingPath = "first item",
+			sBindingPath = "selected",
+			oFirstListItem = createStubbedListItem.call(this, sFirstBindingPath),
+			oSelectedListItemStub = createStubbedListItem.call(this, sBindingPath),
+			oNextListItemStub = createStubbedListItem.call(this, "Next item");
+
+		this.oListSelector._oList = {
+			getMode: this.stub().returns("SingleSelectMaster"),
+			getSelectedItem: this.stub().returns(oSelectedListItemStub),
+			getItems: this.stub().returns([oFirstListItem, oNextListItemStub, oSelectedListItemStub]),
+			setSelectedItem: function (oItem) {
+				//Assert
+				assert.strictEqual(oItem, oSelectedListItemStub, "Did select the list item with a matching binding context");
+			}
+
+		};
+		this.oListSelector.selectAListItem(sBindingPath);
+		// Act
+		// Resolve list loading
+		this.fnAct();
+		var oItem = this.oListSelector.findNextItem(sBindingPath);
+		// Assert
+		assert.ok(oItem.getBindingContext().getPath() === sFirstBindingPath, "did not fail");
 	});
 
 });

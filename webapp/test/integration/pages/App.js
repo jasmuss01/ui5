@@ -1,60 +1,52 @@
 sap.ui.define([
 	"sap/ui/test/Opa5",
-	"sap/ui/test/matchers/PropertyStrictEquals"
-], function(Opa5, PropertyStrictEquals) {
+	"namespace/placeholder/test/integration/pages/Common"
+], function (Opa5, Common) {
 	"use strict";
 
 	var sViewName = "App",
-		sAppControl = "app";
+		sAppControl = "idAppControl";
 
 	Opa5.createPageObjects({
-		onTheAppPage : {
+		onTheAppPage: {
+			baseClass: Common,
 
-			actions : {
+			actions: {
 
-				iWaitUntilTheBusyIndicatorIsGone : function () {
+				iWaitUntilTheBusyIndicatorIsGone: function () {
 					return this.waitFor({
-						id : sAppControl,
-						viewName : sViewName,
-						matchers: new PropertyStrictEquals({
-							name: "busy",
-							value: false
-						}),
-						autoWait: false,
-						success : function () {
-							Opa5.assert.ok(true, "The app is not busy");
+						id: sAppControl,
+						viewName: sViewName,
+						// inline-matcher directly as function
+						matchers: function (oRootView) {
+							// we set the view busy, so we need to query the parent of the app
+							return oRootView.getParent().getBusy() === false;
 						},
-						errorMessage : "The app is busy"
+						errorMessage: "The app is still busy."
 					});
 				}
 
 			},
 
-			assertions : {
+			assertions: {
 
-				iShouldSeeTheBusyIndicator : function () {
+				iShouldSeeTheBusyIndicator: function () {
 					return this.waitFor({
-						id : sAppControl,
-						viewName : sViewName,
-						matchers: new PropertyStrictEquals({
-							name: "busy",
-							value: true
-						}),
-						autoWait: false,
-						success : function () {
-							Opa5.assert.ok(true, "The app is busy");
+						id: sAppControl,
+						viewName: sViewName,
+						success: function (oRootView) {
+							// we set the view busy, so we need to query the parent of the app
+							Opa5.assert.ok(oRootView.getParent().getBusy(), "The app is busy");
 						},
-						errorMessage : "The app is not busy"
+						errorMessage: "The app is not busy."
 					});
 				},
 
-				iShouldSeeTheMessageBox : function () {
+				iShouldSeeTheMessageBox: function (sMessageBoxId) {
 					return this.waitFor({
-						searchOpenDialogs: true,
-						controlType: "sap.m.Dialog",
-						matchers : new PropertyStrictEquals({ name: "type", value: "Message"}),
+						id: sMessageBoxId,
 						success: function () {
-							Opa5.assert.ok(true, "The correct MessageBox was shown");
+							Opa5.assert.ok(true, "the correct MessageBox was shown");
 						}
 					});
 				}

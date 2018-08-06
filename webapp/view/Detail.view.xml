@@ -1,57 +1,48 @@
-<mvc:View controllerName="PlaceholderNamespace.ui5.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
-	<semantic:SemanticPage id="detailPage" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
-		<semantic:titleHeading>
-			<Title text="{Name}"/>
-		</semantic:titleHeading>
-		<semantic:headerContent>
-			<ObjectAttribute title="{i18n>priceTitle}"/>
-		</semantic:headerContent>
+<mvc:View controllerName="namespace.placeholder.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
-			<IconTabBar id="idIconTabBarFiori2" upperCase="true" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+			<ObjectHeader id="objectHeader" title="{Name}"></ObjectHeader>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
-					<IconTabFilter text="Info" count="3">
-						<Table id="lineItemsList" width="auto" items="{zuWindpark}" updateFinished="onListUpdateFinished"
-							noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-							<headerToolbar>
-								<Toolbar>
-									<Title id="lineItemsTitle" text="{detailView>/lineItemListTitle}" titleStyle="H3"/>
-								</Toolbar>
-							</headerToolbar>
-							<columns>
-								<Column>
-									<Text text="{i18n>detailLineItemTableIDColumn}"/>
-								</Column>
-								<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
-									<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
-								</Column>
-							</columns>
-							<items>
-								<ColumnListItem>
-									<cells>
-										<ObjectIdentifier title="{Name}" text="{ID}"/>
-										<ObjectNumber/>
-									</cells>
-								</ColumnListItem>
-							</items>
-						</Table>
-						<Text text="Info content goes here ..."/>
-					</IconTabFilter>
-					<IconTabFilter text="Attachments" count="4321">
-						<Text text="Attachments go here ..."/>
-					</IconTabFilter>
-					<IconTabFilter text="Notes" count="333">
-						<Text text="Notes go here ..."/>
-					</IconTabFilter>
-					<IconTabFilter text="People" count="34">
-						<Text text="People content goes here ..."/>
-					</IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}"></IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}"></IconTabFilter>
 				</items>
 			</IconTabBar>
+			<Table id="lineItemsList" width="auto" items="{zuWindpark}" updateFinished="onListUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{Name}" text="{ID}"/>
+							<ObjectNumber/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
 		</semantic:content>
-		<!--Semantic ShareMenu Buttons-->
+		<semantic:editAction>
+			<semantic:EditAction id="edit" press="onEdit"/>
+		</semantic:editAction>
+		<semantic:customFooterContent>
+			<Button enabled="true" id="deleteButton" press="onDelete" text="Delete"/>
+		</semantic:customFooterContent>
 		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onSendEmailPress"/>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
 		</semantic:sendEmailAction>
 		<semantic:shareInJamAction>
 			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
@@ -59,16 +50,5 @@
 		<semantic:saveAsTileAction>
 			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
 		</semantic:saveAsTileAction>
-		<semantic:closeAction>
-			<semantic:CloseAction id="closeColumn" press="onCloseDetailPress"/>
-		</semantic:closeAction>
-		<semantic:fullScreenAction>
-			<semantic:FullScreenAction id="enterFullScreen"
-				visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}" press="toggleFullScreen"/>
-		</semantic:fullScreenAction>
-		<semantic:exitFullScreenAction>
-			<semantic:ExitFullScreenAction id="exitFullScreen"
-				visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}" press="toggleFullScreen"/>
-		</semantic:exitFullScreenAction>
-	</semantic:SemanticPage>
+	</semantic:DetailPage>
 </mvc:View>

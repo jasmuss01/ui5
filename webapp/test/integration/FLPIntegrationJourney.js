@@ -1,9 +1,5 @@
-/*global QUnit*/
-
 sap.ui.define([
-	"sap/ui/test/opaQunit",
-	"./pages/Master",
-	"./pages/Detail"
+	"sap/ui/test/opaQunit"
 ], function (opaTest) {
 	"use strict";
 
@@ -14,8 +10,7 @@ sap.ui.define([
 		Given.iStartTheApp();
 
 		// Actions
-		When.onTheMasterPage.iPressOnTheObjectAtPosition(1).
-			and.iRememberTheSelectedItem();
+		When.onTheMasterPage.iRememberTheSelectedItem();
 
 		// Assertions
 		Then.onTheDetailPage.iShouldSeeTheRememberedObject();
@@ -24,10 +19,10 @@ sap.ui.define([
 		When.onTheDetailPage.iPressOnTheShareButton();
 
 		// Assertions
-		Then.onTheDetailPage.iShouldSeeTheShareActionButtons().
-			and.theShareTileButtonShouldContainTheRememberedObjectName();
-
-		//Clean up
-		Then.iTeardownMyAppFrame();
+		Then.onTheDetailPage.iShouldSeeTheShareEmailButton().
+		and.iShouldSeeTheShareTileButton().
+		and.theShareTileButtonShouldContainTheRememberedObjectName().
+		and.iTeardownMyAppFrame();
 	});
+
 });

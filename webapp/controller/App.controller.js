@@ -1,42 +1,43 @@
 sap.ui.define([
-		"PlaceholderNamespace/ui5troller",
-		"sap/ui/model/json/JSONModel"
-	], function (BaseController, JSONModel) {
-		"use strict";
+	"namespace/placeholder/controller/BaseController",
+	"sap/ui/model/json/JSONModel"
+], function (BaseController, JSONModel) {
+	"use strict";
 
-		return BaseController.extend("PlaceholderNamespace.ui5.controller.App", {
+	return BaseController.extend("namespace.placeholder.controller.App", {
 
-			onInit : function () {
-				var oViewModel,
-					fnSetAppNotBusy,
-					iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
+		onInit: function () {
+			var oViewModel,
+				fnSetAppNotBusy,
+				oListSelector = this.getOwnerComponent().oListSelector,
+				iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
 
-				oViewModel = new JSONModel({
-					busy : true,
-					delay : 0,
-					layout : "OneColumn",
-					previousLayout : "",
-					actionButtonsInfo : {
-						midColumn : {
-							fullScreen : false
-						}
-					}
-				});
-				this.setModel(oViewModel, "appView");
+			oViewModel = new JSONModel({
+				busy: true,
+				delay: 0,
+				itemToSelect: null,
+				addEnabled: false
 
-				fnSetAppNotBusy = function() {
-					oViewModel.setProperty("/busy", false);
-					oViewModel.setProperty("/delay", iOriginalBusyDelay);
-				};
+			});
+			this.setModel(oViewModel, "appView");
 
-				// since then() has no "reject"-path attach to the MetadataFailed-Event to disable the busy indicator in case of an error
-				this.getOwnerComponent().getModel().metadataLoaded().then(fnSetAppNotBusy);
-				this.getOwnerComponent().getModel().attachMetadataFailed(fnSetAppNotBusy);
+			fnSetAppNotBusy = function () {
+				oViewModel.setProperty("/busy", false);
+				oViewModel.setProperty("/delay", iOriginalBusyDelay);
+			};
 
-				// apply content density mode to root view
-				this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
-			}
+			this.getOwnerComponent().getModel().metadataLoaded()
+				.then(fnSetAppNotBusy);
 
-		});
-	}
-);
+			// Makes sure that master view is hidden in split app
+			// after a new list entry has been selected.
+			oListSelector.attachListSelectionChange(function () {
+				this.byId("idAppControl").hideMaster();
+			}, this);
+
+			// apply content density mode to root view
+			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+		}
+	});
+
+});

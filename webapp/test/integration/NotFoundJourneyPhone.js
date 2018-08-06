@@ -1,9 +1,5 @@
-/*global QUnit*/
-
 sap.ui.define([
-	"sap/ui/test/opaQunit",
-	"./pages/NotFound",
-	"./pages/Master"
+	"sap/ui/test/opaQunit"
 ], function (opaTest) {
 	"use strict";
 
@@ -11,27 +7,49 @@ sap.ui.define([
 
 	opaTest("Should see the not found page if the hash is something that matches no route", function (Given, When, Then) {
 		// Arrangements
-		Given.iStartTheApp({ hash : "somethingThatDoesNotExist" });
+		Given.iStartTheApp({
+			hash: "somethingThatDoesNotExist"
+		});
+
+		// Actions
+		When.onTheNotFoundPage.iLookAtTheScreen();
 
 		// Assertions
 		Then.onTheNotFoundPage.iShouldSeeTheNotFoundPage().
-			and.theNotFoundPageShouldSayResourceNotFound();
-		// Cleanup
-		Then.iTeardownMyAppFrame();
+		and.theNotFoundPageShouldSayResourceNotFound();
 	});
 
+	opaTest("Should end up on the master list, if the back button is pressed", function (Given, When, Then) {
+		// Actions
+		When.onTheNotFoundPage.iPressTheBackButton("NotFound");
 
-	opaTest("Should see the not found detail page if an invalid object id has been called", function (Given, When, Then) {
+		// Assertions
+		Then.onTheMasterPage.iShouldSeeTheList().
+		and.iTeardownMyAppFrame();
+	});
+
+	opaTest("Should see the not found master and detail page if an invalid object id has been called", function (Given, When, Then) {
 		// Arrangements
-		Given.iStartTheApp({ hash : "/ProjektSet/SomeInvalidObjectId" });
+		Given.iStartTheApp({
+			hash: "/ProjektSet/SomeInvalidObjectId"
+		});
+
+		// Actions
+		When.onTheNotFoundPage.iLookAtTheScreen();
 
 		// Assertions
 		Then.onTheNotFoundPage.iShouldSeeTheObjectNotFoundPage().
-			and.theNotFoundPageShouldSayObjectNotFound();
-		// Cleanup
-		Then.iTeardownMyAppFrame();
+		and.theNotFoundPageShouldSayObjectNotFound();
 	});
 
+	opaTest("Should end up on the master list, if the back button is pressed", function (Given, When, Then) {
+		// Actions
+		When.onTheNotFoundPage.iPressTheBackButton("DetailObjectNotFound");
+
+		// Assertions
+		Then.onTheMasterPage.iShouldSeeTheList().
+		and.iTeardownMyAppFrame();
+	});
 
 	opaTest("Should see the not found text for no search results", function (Given, When, Then) {
 		// Arrangements
@@ -41,10 +59,8 @@ sap.ui.define([
 		When.onTheMasterPage.iSearchForSomethingWithNoResults();
 
 		// Assertions
-		Then.onTheMasterPage.iShouldSeeTheNoDataTextForNoSearchResults();
-
-		// Cleanup
-		Then.iTeardownMyAppFrame();
+		Then.onTheMasterPage.iShouldSeeTheNoDataTextForNoSearchResults().
+		and.iTeardownMyAppFrame();
 	});
 
 });

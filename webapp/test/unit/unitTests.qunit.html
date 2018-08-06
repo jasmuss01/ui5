@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Unit tests for Projektverwaltung</title>
+		<title>Unit tests for ProjekteVerwaltung</title>
 		<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
 		<meta charset="UTF-8">
 
@@ -9,28 +9,25 @@
 			src="../../resources/sap-ui-core.js"
 			data-sap-ui-libs="sap.m"
 			data-sap-ui-resourceroots='{
-				"PlaceholderNamespace/ui5": "../../"
-			}'
-			data-sap-ui-preload="async">
+				"namespace/placeholder": "../../",
+				"test/unit": "./"
+			}'>
 		</script>
 
-		<script src="../../resources/sap/ui/qunit/qunit-2-css.js"></script>
-		<script src="../../resources/sap/ui/thirdparty/qunit-2.js"></script>
-		<script src="../../resources/sap/ui/qunit/qunit-junit.js"></script>
-		<script src="../../resources/sap/ui/qunit/qunit-coverage.js"></script>
-
 		<script>
-			/* global QUnit */
+			jQuery.sap.require("sap.ui.qunit.qunit-css");
+			jQuery.sap.require("sap.ui.thirdparty.qunit");
+			jQuery.sap.require("sap.ui.qunit.qunit-junit");
+			jQuery.sap.require("sap.ui.qunit.qunit-coverage");
 
 			QUnit.config.autostart = false;
 
-			sap.ui.getCore().attachInit(function () {
-				sap.ui.require([
-					"PlaceholderNamespace/ui5/test/unit/allTests"
-				], function() {
-					QUnit.start();
-				});
-			});
+			sap.ui.require(
+					["test/unit/allTests"],
+					function() {
+						QUnit.start();
+					}
+			);
 		</script>
 
 	</head>
