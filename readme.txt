@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  #### WELCOME ####
 
 This is your copy of the SAPUI5 Master-Detail Freestyle Application Template.
@@ -12,3 +13,6 @@ https://sapui5.hana.ondemand.com/#docs/guide/a460a7348a6c431a8bd967ab9fb8d918.ht
 
 
  #### Happy Development! ####
+=======
+Moin
+>>>>>>> refs/remotes/origin/masterbranch
