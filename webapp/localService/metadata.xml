@@ -1,0 +1,104 @@
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="2172f16885765e23102b09e2" xml:lang="en" sap:schema-version="0000" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityContainer Name="2172f16885765e23102b09e2_Entities" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="ProjektSet" EntityType="2172f16885765e23102b09e2.Projekt" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+				<AssociationSet Name="ProjektzuWindparkWindpark" Association="2172f16885765e23102b09e2.ProjektzuWindparkWindpark" sap:creatable="true"
+					sap:updatable="true" sap:deletable="true">
+					<End EntitySet="ProjektSet" Role="FromRole_ProjektzuWindparkWindpark"/>
+					<End EntitySet="WindparkSet" Role="ToRole_ProjektzuWindparkWindpark"/>
+				</AssociationSet>
+				<EntitySet Name="WarnungSet" EntityType="2172f16885765e23102b09e2.Warnung" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+				<AssociationSet Name="WarnungzuAnhangAnhang" Association="2172f16885765e23102b09e2.WarnungzuAnhangAnhang" sap:creatable="true"
+					sap:updatable="true" sap:deletable="true">
+					<End EntitySet="WarnungSet" Role="FromRole_WarnungzuAnhangAnhang"/>
+					<End EntitySet="AnhangSet" Role="ToRole_WarnungzuAnhangAnhang"/>
+				</AssociationSet>
+				<EntitySet Name="AnhangSet" EntityType="2172f16885765e23102b09e2.Anhang" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+				<EntitySet Name="WindparkSet" EntityType="2172f16885765e23102b09e2.Windpark" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+				<AssociationSet Name="WindparkzuWarnungWarnung" Association="2172f16885765e23102b09e2.WindparkzuWarnungWarnung" sap:creatable="true"
+					sap:updatable="true" sap:deletable="true">
+					<End EntitySet="WindparkSet" Role="FromRole_WindparkzuWarnungWarnung"/>
+					<End EntitySet="WarnungSet" Role="ToRole_WindparkzuWarnungWarnung"/>
+				</AssociationSet>
+			</EntityContainer>
+			<EntityType Name="Projekt">
+				<Key>
+					<PropertyRef Name="ID"/>
+				</Key>
+				<Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+				<Property Name="Name" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName"/>
+				<NavigationProperty Name="zuWindpark" Relationship="2172f16885765e23102b09e2.ProjektzuWindparkWindpark"
+					FromRole="FromRole_ProjektzuWindparkWindpark" ToRole="ToRole_ProjektzuWindparkWindpark"/>
+			</EntityType>
+			<Association Name="ProjektzuWindparkWindpark">
+				<End Type="2172f16885765e23102b09e2.Projekt" Multiplicity="1" Role="FromRole_ProjektzuWindparkWindpark"/>
+				<End Type="2172f16885765e23102b09e2.Windpark" Multiplicity="*" Role="ToRole_ProjektzuWindparkWindpark"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_ProjektzuWindparkWindpark">
+						<PropertyRef Name="ID"/>
+					</Principal>
+					<Dependent Role="ToRole_ProjektzuWindparkWindpark">
+						<PropertyRef Name="___FK_2225d019ce56dfec102b45f8_00014"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityType Name="Warnung">
+				<Key>
+					<PropertyRef Name="ID"/>
+				</Key>
+				<Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+				<Property Name="Typ" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Typ"/>
+				<Property Name="___FK_2225d019ce56dfec102b45f8_00012" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true"
+					sap:label="___FK_2225d019ce56dfec102b45f8_00012"/>
+				<NavigationProperty Name="zuAnhang" Relationship="2172f16885765e23102b09e2.WarnungzuAnhangAnhang" FromRole="FromRole_WarnungzuAnhangAnhang"
+					ToRole="ToRole_WarnungzuAnhangAnhang"/>
+			</EntityType>
+			<Association Name="WarnungzuAnhangAnhang">
+				<End Type="2172f16885765e23102b09e2.Warnung" Multiplicity="1" Role="FromRole_WarnungzuAnhangAnhang"/>
+				<End Type="2172f16885765e23102b09e2.Anhang" Multiplicity="*" Role="ToRole_WarnungzuAnhangAnhang"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_WarnungzuAnhangAnhang">
+						<PropertyRef Name="ID"/>
+					</Principal>
+					<Dependent Role="ToRole_WarnungzuAnhangAnhang">
+						<PropertyRef Name="___FK_e70dd1d9ffc1bc77102b33a5_00014"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityType Name="Anhang">
+				<Key>
+					<PropertyRef Name="ID"/>
+				</Key>
+				<Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+				<Property Name="___FK_e70dd1d9ffc1bc77102b33a5_00014" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true"
+					sap:label="___FK_e70dd1d9ffc1bc77102b33a5_00014"/>
+				<Property Name="Art" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName"/>
+			</EntityType>
+			<EntityType Name="Windpark">
+				<Key>
+					<PropertyRef Name="ID"/>
+				</Key>
+				<Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+				<Property Name="Name" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Name"/>
+				<Property Name="___FK_2225d019ce56dfec102b45f8_00014" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true"
+					sap:label="___FK_2225d019ce56dfec102b45f8_00014"/>
+				<NavigationProperty Name="zuWarnung" Relationship="2172f16885765e23102b09e2.WindparkzuWarnungWarnung"
+					FromRole="FromRole_WindparkzuWarnungWarnung" ToRole="ToRole_WindparkzuWarnungWarnung"/>
+			</EntityType>
+			<Association Name="WindparkzuWarnungWarnung">
+				<End Type="2172f16885765e23102b09e2.Windpark" Multiplicity="1" Role="FromRole_WindparkzuWarnungWarnung"/>
+				<End Type="2172f16885765e23102b09e2.Warnung" Multiplicity="*" Role="ToRole_WindparkzuWarnungWarnung"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_WindparkzuWarnungWarnung">
+						<PropertyRef Name="ID"/>
+					</Principal>
+					<Dependent Role="ToRole_WindparkzuWarnungWarnung">
+						<PropertyRef Name="___FK_2225d019ce56dfec102b45f8_00012"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
